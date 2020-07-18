@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  php:
+    container_name: php
+    build: ./php
+    volumes:
+      - ./app:/app
+      - ./php/cache:/root/.composer/cache
+    working_dir: /app
+
+  apache:
+    container_name: apache
+    build: ./apache
+    volumes:
+      - ./app/public:/var/www/html
+    depends_on:
+      - php
+    ports:
+      - "8000:80"
+      - "4430:443"

@@ -24,7 +24,8 @@ RUN apt install -y \
     php7.4-xdebug \
     php7.4-xml \
     php7.4-mbstring \
-    php-redis
+    php-redis \
+    php7.4-mysql
 
 RUN for sapi in cli fpm; \
 do \

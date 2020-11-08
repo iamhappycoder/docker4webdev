@@ -74,3 +74,30 @@ NOTES:
     - "4431:443"
     - "33061:3306"
     ```
+- Switching to PostgeSQL
+
+  Change cli/Dockerfile
+  
+  ```php7.4-mysql```
+  
+  to
+  
+  ```php7.4-pgsql```
+  
+  Change db service to
+  
+  ```
+    db:
+      container_name: db
+      image: postgres:13.0
+      volumes:
+        - ./db/data:/var/lib/postgresql/data
+      environment:
+        POSTGRES_PASSWORD: root
+      ports:
+        - "54321:5432"
+  ```
+  
+  Remove db/data/.gitignore because PostgreSQL does not like it being present
+  
+  ```rm -rf db/data/.gitignore```

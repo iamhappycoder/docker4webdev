@@ -1,32 +1,30 @@
 version: "3"
 
 services:
-  php:
-    container_name: php
-    build: ./php
+  cli:
+    container_name: cli
+    build: ./cli
     volumes:
       - ./app:/app
-      - ./php/cache:/root/.composer/cache
+      - ./cli/cache:/root/.composer/cache
     working_dir: /app
 
-  apache:
-    container_name: apache
-    build: ./apache
+  web:
+    container_name: web
+    build: ./web
     volumes:
-      - ./app/public:/var/www/html
-    depends_on:
-      - php
+      - ./app:/var/www/html
     ports:
       - "8000:80"
       - "4430:443"
 
-  mysql:
-    container_name: mysql
-    image: mysql:5.7
+  db:
+    container_name: db
+    image: mariadb:10.5
     volumes:
-      - ./mysql/data:/var/lib/mysql
+      - ./db/data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: symfony
+      MYSQL_DATABASE: master
     ports:
       - "33060:3306"

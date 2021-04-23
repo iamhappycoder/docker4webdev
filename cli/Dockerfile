@@ -40,7 +40,7 @@ do \
 done
 
 RUN echo "\nopcache.enable=1\nopcache.enable_cli=1" | tee --append /etc/php/7.4/mods-available/opcache.ini > /dev/null
-RUN echo "\nxdebug.var_display_max_data = -1\nxdebug.var_display_max_children = -1\nxdebug.var_display_max_depth = -1\nxdebug.remote_enable = 1\nxdebug.remote_connect_back = 1" | tee --append /etc/php/7.4/mods-available/xdebug.ini > /dev/null
+RUN echo "\nxdebug.var_display_max_data = -1\nxdebug.var_display_max_children = -1\nxdebug.var_display_max_depth = -1\nxdebug.mode = debug\nxdebug.discover_client_host = true\nxdebug.client_port = 9001" | tee --append /etc/php/7.4/mods-available/xdebug.ini > /dev/null
 
 RUN sed -i \
         -e 's/;daemonize = yes/daemonize = no/g' \

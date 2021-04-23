@@ -16,40 +16,36 @@ RUN LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php
 RUN apt update -y
 
 #
-# PHP 7.4
+# PHP 8.0
 #
 RUN apt install -y \
-    php7.4-cli \
-    php7.4-fpm \
-    php7.4-xdebug \
-    php7.4-xml \
-    php7.4-mbstring \
+    php8.0-cli \
+    php8.0-fpm \
+    php8.0-xdebug \
+    php8.0-xml \
+    php8.0-mbstring \
     php-redis \
-    php7.4-mysql
+    php8.0-mysql
 
 RUN for sapi in cli fpm; \
 do \
-    if [ -d /etc/php/7.4/$sapi ]; \
+    if [ -d /etc/php/8.0/$sapi ]; \
     then \
-        sed -i \
-            -e 's/^memory_limit = -1/memory_limit = 1G/g' \
-            -e 's/^error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = E_ALL/g' \
-            -e 's/^;date.timezone =/date.timezone = UTC/g' \
-            /etc/php/7.4/$sapi/php.ini; \
+        echo "memory_limit = 1G\nerror_reporting = E_ALL\ndate.timezone = UTC\n" | tee --append /etc/php/8.0/$sapi/php.ini; \
     fi; \
 done
 
-RUN echo "\nopcache.enable=1\nopcache.enable_cli=1" | tee --append /etc/php/7.4/mods-available/opcache.ini > /dev/null
-RUN echo "\nxdebug.var_display_max_data = -1\nxdebug.var_display_max_children = -1\nxdebug.var_display_max_depth = -1\nxdebug.mode = debug\nxdebug.discover_client_host = true\nxdebug.client_port = 9001" | tee --append /etc/php/7.4/mods-available/xdebug.ini > /dev/null
+RUN echo "\nopcache.enable=1\nopcache.enable_cli=1" | tee --append /etc/php/8.0/mods-available/opcache.ini > /dev/null
+RUN echo "\nxdebug.var_display_max_data = -1\nxdebug.var_display_max_children = -1\nxdebug.var_display_max_depth = -1\nxdebug.mode = debug\nxdebug.discover_client_host = true\nxdebug.client_port = 9001" | tee --append /etc/php/8.0/mods-available/xdebug.ini > /dev/null
 
 RUN sed -i \
         -e 's/;daemonize = yes/daemonize = no/g' \
-        -e 's/pid = \/run\/php\/php7.4-fpm.pid/pid = \/run\/php7.4-fpm.pid/g' \
-        /etc/php/7.4/fpm/php-fpm.conf
+        -e 's/pid = \/run\/php\/php8.0-fpm.pid/pid = \/run\/php8.0-fpm.pid/g' \
+        /etc/php/8.0/fpm/php-fpm.conf
 
 RUN sed -i \
-        -e 's/listen = \/run\/php\/php7.4-fpm.sock/listen = 9000/g' \
-        /etc/php/7.4/fpm/pool.d/www.conf
+        -e 's/listen = \/run\/php\/php8.0-fpm.sock/listen = 9000/g' \
+        /etc/php/8.0/fpm/pool.d/www.conf
 
 #
 # NodeJS (for Webpack Encore)
@@ -68,4 +64,4 @@ RUN curl -LsS  https://getcomposer.org/composer.phar -o /usr/local/bin/composer
 RUN chmod a+x /usr/local/bin/composer
 
 EXPOSE 9000
-ENTRYPOINT ["php-fpm7.4", "--force-stderr", "--fpm-config", "/etc/php/7.4/fpm/php-fpm.conf"]
+ENTRYPOINT ["php-fpm8.0", "--force-stderr", "--fpm-config", "/etc/php/8.0/fpm/php-fpm.conf"]

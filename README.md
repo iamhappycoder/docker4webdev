@@ -47,6 +47,8 @@ NOTES:
   
   ```
   $ docker-compose exec cli composer create-project symfony/skeleton .
+  $ docker-compose exec cli composer require --dev phpunit/phpunit symfony/test-pack
+  $ docker-compose exec cli vendor/bin/simple-phpunit
   ```
 - The container names need to be unique when using this template for multiple projects
 

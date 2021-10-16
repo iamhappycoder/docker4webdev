@@ -101,3 +101,30 @@ NOTES:
   Remove db/data/.gitignore because PostgreSQL does not like it being present
   
   ```rm -rf db/data/.gitignore```
+
+
+- Using with an existing project.
+
+  .env
+  ```
+  APP_DIR=[path to project dir]
+  ```
+
+  .docker-compose.override.yml
+  ```
+  version: "3"
+
+  services:
+    cli:
+      container_name: cli-symfony-test
+      volumes:
+        - ${APP_DIR}:/app
+
+    web:
+      container_name: web-symfony-test
+      volumes:
+        - ${APP_DIR}:/var/www/html
+
+    db:
+      container_name: db-symfony-test
+  ```

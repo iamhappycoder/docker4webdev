@@ -25,7 +25,8 @@ RUN apt install -y \
     php8.0-xml \
     php8.0-mbstring \
     php-redis \
-    php8.0-mysql
+    php8.0-mysql \
+    php8.0-curl
 
 RUN for sapi in cli fpm; \
 do \

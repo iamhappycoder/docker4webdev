@@ -118,15 +118,15 @@ NOTES:
 
   services:
     cli:
-      container_name: cli-symfony-test
+      container_name: cli-[project name]
       volumes:
         - ${APP_DIR}:/app
 
     web:
-      container_name: web-symfony-test
+      container_name: web-[project name]
       volumes:
         - ${APP_DIR}:/var/www/html
 
     db:
-      container_name: db-symfony-test
+      container_name: db-[project name]
   ```

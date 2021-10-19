@@ -129,4 +129,6 @@ NOTES:
 
     db:
       container_name: db-[project name]
+  
+  In PhpStorm, add both compose files with the override at the top of the list.
   ```

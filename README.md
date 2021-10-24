@@ -23,6 +23,21 @@ Usage:
   $ docker-compose exec cli vendor/bin/simple-phpunit
   ```
   
+- Create host file for web server
+
+  ```
+  $ docker-compose ps -q web | cut -c -12
+  [CONTAINER-ID]
+  
+  $ docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' [CONTAINER-ID]
+  [CONTAINER-IP]
+  ```
+
+  /etc/hosts
+  ```
+  [CONTAINER-IP]    docker-phpdev.local
+  ```
+  
 NOTES:
 
 - Add PHP modules and/or other CLI tools in cli/Dockerfile

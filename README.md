@@ -23,11 +23,11 @@ Usage:
   $ docker-compose exec php vendor/bin/simple-phpunit
   ```
 
-- Run commands within the nodejs container
+- Run NodeJS commands within the web container
 
   ```
-  $ docker-compose run nodejs yarn install
-  $ docker-compose run nodejs yarn start
+  $ docker-compose run web yarn install
+  $ docker-compose run web yarn start
   ```
   
 - Create host file for web server

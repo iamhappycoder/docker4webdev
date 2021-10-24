@@ -49,16 +49,6 @@ RUN sed -i \
         /etc/php/8.0/fpm/pool.d/www.conf
 
 #
-# NodeJS (for Webpack Encore)
-#
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-
-RUN apt update -y
-RUN apt install -y nodejs yarn
-
-#
 # Composer
 #
 RUN curl -LsS  https://getcomposer.org/composer.phar -o /usr/local/bin/composer

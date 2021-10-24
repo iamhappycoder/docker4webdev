@@ -5,7 +5,7 @@ services:
     container_name: cli
     build: ./cli
     volumes:
-      - ./app:/app
+      - ${APP_DIR}:/app
       - ./cli/cache:/root/.composer/cache
     working_dir: /app
 
@@ -13,7 +13,7 @@ services:
     container_name: web
     build: ./web
     volumes:
-      - ./app:/var/www/html
+      - ${APP_DIR}:/var/www/html
     ports:
       - "8000:80"
       - "4430:443"

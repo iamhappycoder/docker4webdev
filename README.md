@@ -4,6 +4,8 @@ Project template for PHP development in a Docker environment.
 
 Usage:
 
+- Create .env from .env.dist
+
 - Put project files in app/
 
 - Build
@@ -110,25 +112,4 @@ NOTES:
   .env
   ```
   APP_DIR=[path to project dir]
-  ```
-
-  .docker-compose.override.yml
-  ```
-  version: "3"
-
-  services:
-    cli:
-      container_name: cli-[project name]
-      volumes:
-        - ${APP_DIR}:/app
-
-    web:
-      container_name: web-[project name]
-      volumes:
-        - ${APP_DIR}:/var/www/html
-
-    db:
-      container_name: db-[project name]
-  
-  In PhpStorm, add both compose files with the override at the top of the list.
   ```

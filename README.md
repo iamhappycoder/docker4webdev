@@ -16,11 +16,18 @@ Usage:
 
   `````$ docker-compose up`````
   
-- Run commands within the cli container
+- Run commands within the php container
 
   ```
-  $ docker-compose exec cli composer install -vvv
-  $ docker-compose exec cli vendor/bin/simple-phpunit
+  $ docker-compose exec php composer install -vvv
+  $ docker-compose exec php vendor/bin/simple-phpunit
+  ```
+
+- Run commands within the nodejs container
+
+  ```
+  $ docker-compose run nodejs yarn install
+  $ docker-compose run nodejs yarn start
   ```
   
 - Create host file for web server
@@ -40,17 +47,17 @@ Usage:
   
 NOTES:
 
-- Add PHP modules and/or other CLI tools in cli/Dockerfile
+- Add PHP modules and/or other CLI tools in php/Dockerfile
 - The containers can be reached from other services via their container name.
 - Using with Symfony
 
   Change web/000-default.conf
 
-    ```fcgi://cli:9000/app/$1```
+    ```fcgi://php:9000/app/$1```
     
     to
     
-    ```fcgi://cli:9000/app/public/$1```
+    ```fcgi://php:9000/app/public/$1```
     
   Change web service volumes in docker-compose.yml
    
@@ -63,9 +70,9 @@ NOTES:
   Run something like the following if creating a project from scratch
   
   ```
-  $ docker-compose exec cli composer create-project symfony/skeleton .
-  $ docker-compose exec cli composer require --dev phpunit/phpunit symfony/test-pack
-  $ docker-compose exec cli vendor/bin/simple-phpunit
+  $ docker-compose exec php composer create-project symfony/skeleton .
+  $ docker-compose exec php composer require --dev phpunit/phpunit symfony/test-pack
+  $ docker-compose exec php vendor/bin/simple-phpunit
   ```
 - When using multiple copies of this template, make sure the directory names are unique to each other (https://docs.docker.com/compose/#multiple-isolated-environments-on-a-single-host).
 
@@ -87,7 +94,7 @@ NOTES:
 
 - Switching to PostgeSQL
 
-  Change cli/Dockerfile
+  Change php/Dockerfile
   
   ```php7.4-mysql```
   

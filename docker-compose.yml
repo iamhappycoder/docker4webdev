@@ -1,11 +1,11 @@
 version: "3"
 
 services:
-  cli:
-    build: ./cli
+  php:
+    build: ./php
     volumes:
       - ${APP_DIR}:/app
-      - ./cli/cache:/root/.composer/cache
+      - ./php/cache:/root/.composer/cache
     working_dir: /app
 
   web:

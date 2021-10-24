@@ -70,13 +70,6 @@ NOTES:
 
   An alternative is to specify container_name for each service.
 
-  Change host port numbers but keep container port numbers
-  
-    ```
-    - "8001:80"
-    - "4431:443"
-    - "33061:3306"
-    ```
 - Switching to PostgeSQL
 
   Change cli/Dockerfile
@@ -97,8 +90,6 @@ NOTES:
         - ./db/data:/var/lib/postgresql/data
       environment:
         POSTGRES_PASSWORD: root
-      ports:
-        - "54321:5432"
   ```
   
   Remove db/data/.gitignore because PostgreSQL does not like it being present

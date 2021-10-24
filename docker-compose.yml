@@ -12,9 +12,6 @@ services:
     build: ./web
     volumes:
       - ${APP_DIR}:/var/www/html
-    ports:
-      - "8000:80"
-      - "4430:443"
 
   db:
     image: mariadb:10.5
@@ -23,5 +20,3 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: master
-    ports:
-      - "33060:3306"

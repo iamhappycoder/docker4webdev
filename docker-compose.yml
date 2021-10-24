@@ -2,7 +2,6 @@ version: "3"
 
 services:
   cli:
-    container_name: cli
     build: ./cli
     volumes:
       - ${APP_DIR}:/app
@@ -10,7 +9,6 @@ services:
     working_dir: /app
 
   web:
-    container_name: web
     build: ./web
     volumes:
       - ${APP_DIR}:/var/www/html
@@ -19,7 +17,6 @@ services:
       - "4430:443"
 
   db:
-    container_name: db
     image: mariadb:10.5
     volumes:
       - ./db/data:/var/lib/mysql

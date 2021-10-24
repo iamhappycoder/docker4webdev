@@ -52,25 +52,24 @@ NOTES:
   $ docker-compose exec cli composer require --dev phpunit/phpunit symfony/test-pack
   $ docker-compose exec cli vendor/bin/simple-phpunit
   ```
-- The container names need to be unique when using this template for multiple projects
+- When using multiple copies of this template, make sure the directory names are unique to each other (https://docs.docker.com/compose/#multiple-isolated-environments-on-a-single-host).
 
-  Rename the containers
+  Unique:
 
-    from
-    ```
-    container_name: cli
-    container_name: web
-    container_name: db
-    ```
-    
-    to
-    
-    ```
-    container_name: cli-<project name>
-    container_name: web-<project name>
-    container_name: db-<project name>
-    ```
-  
+  ```
+  ~/backend/docker-phpdev-symfony
+  ~/frontend/docker-phpdev-laravel
+  ```
+
+  Not unique:
+
+  ```
+  ~/backend/docker-phpdev
+  ~/frontend/docker-phpdev
+  ```
+
+  An alternative is to specify container_name for each service.
+
   Change host port numbers but keep container port numbers
   
     ```

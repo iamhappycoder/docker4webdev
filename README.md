@@ -51,22 +51,23 @@ NOTES:
 - The containers can be reached from other services via their container name.
 - Using with Symfony
 
-  Change web/000-default.conf
+  Change web service like this
 
-    ```fcgi://php:9000/app/$1```
-    
-    to
-    
-    ```fcgi://php:9000/app/public/$1```
-    
-  Change web service volumes in docker-compose.yml
-   
-   ```- ./app:/var/www/html```
-   
-   to
-   
-   ```- ./app/public:/var/www/html```
-   
+  ```
+  web:
+    build: ./web
+    volumes:
+      - ${APP_DIR}:/app
+      - ${APP_DIR}/public:/var/www/html
+    working_dir: /app
+  ```
+
+  Change web/000-default.conf like this
+ 
+  ```
+  fcgi://php:9000/app/public/$1
+  ```
+  
   Run something like the following if creating a project from scratch
   
   ```

@@ -74,6 +74,9 @@ NOTES:
   $ docker-compose exec php composer create-project symfony/skeleton .
   $ docker-compose exec php composer require --dev phpunit/phpunit symfony/test-pack
   $ docker-compose exec php vendor/bin/simple-phpunit
+  
+  $ docker-compose exec php setfacl -dR -m u:www-data:rwX -m u:root:rwX var
+  $ docker-compose exec php setfacl -R -m u:www-data:rwX -m u:root:rwX var
   ```
 - When using multiple copies of this template, make sure the directory names are unique to each other (https://docs.docker.com/compose/#multiple-isolated-environments-on-a-single-host).
 

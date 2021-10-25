@@ -7,7 +7,7 @@ ENV TZ=UTC
 # Common
 #
 RUN apt update -y
-RUN apt install -y curl unzip software-properties-common
+RUN apt install -y curl unzip software-properties-common acl
 
 #
 # ppa-ondrej-php

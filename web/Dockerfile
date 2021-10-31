@@ -1,5 +1,7 @@
 FROM ubuntu:18.04
 
+ARG PUBLIC_DIR
+
 #
 # Common
 #
@@ -13,7 +15,9 @@ RUN a2enmod proxy proxy_fcgi rewrite expires headers ssl
 RUN a2ensite default-ssl
 
 RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
+
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
+RUN sed -i "s|_PUBLIC_DIR_|${PUBLIC_DIR}|g" /etc/apache2/sites-available/000-default.conf
 
 #
 # NodeJS

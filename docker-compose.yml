@@ -9,10 +9,16 @@ services:
     working_dir: /app
 
   web:
-    build: ./web
+    build:
+      context: ./web
+      args:
+        - PUBLIC_DIR
     volumes:
-      - ${APP_DIR}:/var/www/html
-    working_dir: /var/www/html
+      # Use long form syntax to prevent unnecessary creation of files or folders.
+      - type: bind
+        source: ${APP_DIR}
+        target: /app
+    working_dir: /app
 
   db:
     image: mariadb:10.5

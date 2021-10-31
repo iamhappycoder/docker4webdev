@@ -51,21 +51,10 @@ NOTES:
 - The containers can be reached from other services via their container name.
 - Using with Symfony
 
-  Change web service like this
+  .env
 
   ```
-  web:
-    build: ./web
-    volumes:
-      - ${APP_DIR}:/app
-      - ${APP_DIR}/public:/var/www/html
-    working_dir: /app
-  ```
-
-  Change web/000-default.conf like this
- 
-  ```
-  fcgi://php:9000/app/public/$1
+  PUBLIC_DIR=/public
   ```
   
   Run something like the following if creating a project from scratch

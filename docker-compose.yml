@@ -2,23 +2,32 @@ version: "3"
 
 services:
   php:
-    build: ./php
+    build:
+      context: ./php
+      dockerfile: Dockerfile.${OS}
     volumes:
       - ${APP_DIR}:/app
       - ./php/cache:/root/.composer/cache
     working_dir: /app
 
+  nodejs:
+    image: node:latest
+    volumes:
+      - ${APP_DIR}:/app
+    working_dir: /app
+
   web:
     build:
       context: ./web
+      dockerfile: Dockerfile.${WEB_SERVER}
       args:
         - PUBLIC_DIR
     volumes:
-      # Use long form syntax to prevent unnecessary creation of files or folders.
-      - type: bind
-        source: ${APP_DIR}
-        target: /app
+      - ${APP_DIR}:/app
     working_dir: /app
+    ports:
+      - "8000:80"
+      - "4430:443"
 
   db:
     image: mariadb:10.5
@@ -27,3 +36,14 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: master
+
+  redis:
+    image: redis:5
+    ports:
+      - "63790:6379"
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "10250:1025"
+      - "8020:8025"

@@ -1,0 +1,53 @@
+FROM quay.io/centos/centos:stream9
+
+#
+# Common
+#
+RUN echo -e "max_parallel_downloads=10\nmax_parallel_downloads=10" | tee --append /etc/dnf/dnf.conf > /dev/null
+RUN dnf install -y \
+    https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm \
+    https://dl.fedoraproject.org/pub/epel/epel-next-release-latest-9.noarch.rpm
+RUN dnf upgrade -y --refresh
+RUN dnf install -y unzip acl
+
+#
+# PHP
+#
+RUN dnf install -y \
+    php-bcmath \
+    php-cli \
+    php-fpm \
+    php-gd \
+    php-intl \
+    php-xml \
+    php-mbstring \
+    php-mysqlnd \
+    php-xml \
+    php-opcache \
+    php-pecl-xdebug \
+    php-pecl-redis \
+    php-pecl-zip
+RUN echo -e "memory_limit = 1G\nerror_reporting = E_ALL\ndate.timezone = UTC\nupload_max_filesize = 10M\n" | tee --append /etc/php.ini > /dev/null
+RUN echo -e "\nopcache.enable=1\nopcache.enable_cli=1" | tee --append /etc/php.d/10-opcache.ini > /dev/null
+RUN echo -e "\nxdebug.var_display_max_data = -1\nxdebug.var_display_max_children = -1\nxdebug.var_display_max_depth = -1\nxdebug.mode = debug\nxdebug.discover_client_host = true\nxdebug.client_port = 9001" | tee --append /etc/php.d/15-xdebug.ini > /dev/null
+
+#
+# PHP-FPM
+#
+RUN sed -i \
+    -e 's/daemonize = yes/daemonize = no/g' \
+    -e 's/pid = \/run\/php-fpm\/php-fpm.pid/pid = \/run\/php-fpm.pid/g' \
+    /etc/php-fpm.conf
+RUN sed -i \
+    -e 's/listen = \/run\/php-fpm\/www.sock/listen = 9000/g' \
+    -e 's/listen.allowed_clients = 127.0.0.1/;listen.allowed_clients = 127.0.0.1/g' \
+    /etc/php-fpm.d/www.conf
+
+#
+# Composer
+#
+RUN curl -LsS  https://getcomposer.org/composer.phar -o /usr/local/bin/composer
+RUN chmod a+x /usr/local/bin/composer
+
+EXPOSE 9000/tcp
+ENTRYPOINT ["php-fpm", "--allow-to-run-as-root"]

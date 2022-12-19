@@ -1,0 +1,6 @@
+FROM nginx:stable
+
+ARG PUBLIC_DIR
+
+COPY nginx-default.conf /etc/nginx/conf.d/default.conf
+RUN sed -i "s|_PUBLIC_DIR_|${PUBLIC_DIR}|g" /etc/nginx/conf.d/default.conf

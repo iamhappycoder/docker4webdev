@@ -11,8 +11,16 @@ RUN dnf upgrade -y --refresh
 RUN dnf install -y unzip acl
 
 #
+# REMI
+#
+RUN dnf install -y dnf-utils http://rpms.remirepo.net/enterprise/remi-release-9.rpm
+RUN dnf update -y --refresh
+
+#
 # PHP
 #
+RUN dnf module reset php
+RUN dnf module enable -y php:remi-8.2
 RUN dnf install -y \
     php-bcmath \
     php-cli \

@@ -3,7 +3,7 @@ FROM quay.io/centos/centos:stream9
 #
 # Common
 #
-RUN echo -e "max_parallel_downloads=10\nmax_parallel_downloads=10" | tee --append /etc/dnf/dnf.conf > /dev/null
+RUN echo -e "max_parallel_downloads=10\nfastestmirror=True" | tee --append /etc/dnf/dnf.conf > /dev/null
 RUN dnf install -y \
     https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm \
     https://dl.fedoraproject.org/pub/epel/epel-next-release-latest-9.noarch.rpm

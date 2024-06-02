@@ -10,30 +10,30 @@ Usage:
 
 - Build
 
-  `````$ docker-compose build`````
+  `````$ docker compose build`````
 
 - Start containers
 
-  `````$ docker-compose up`````
+  `````$ docker compose up`````
   
 - Run commands within the php container
 
   ```
-  $ docker-compose exec php composer install -vvv
-  $ docker-compose exec php vendor/bin/simple-phpunit
+  $ docker compose exec php composer install -vvv
+  $ docker compose exec php vendor/bin/simple-phpunit
   ```
 
 - Run NodeJS commands within the web container
 
   ```
-  $ docker-compose run web yarn install
-  $ docker-compose run web yarn start
+  $ docker compose run web yarn install
+  $ docker compose run web yarn start
   ```
   
 - Create host file for web server
 
   ```
-  $ docker-compose ps -q web | cut -c -12
+  $ docker compose ps -q web | cut -c -12
   [CONTAINER-ID]
   
   $ docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' [CONTAINER-ID]
@@ -60,12 +60,11 @@ NOTES:
   Run something like the following if creating a project from scratch
   
   ```
-  $ docker-compose exec php composer create-project symfony/skeleton .
-  $ docker-compose exec php composer require --dev phpunit/phpunit symfony/test-pack
-  $ docker-compose exec php vendor/bin/simple-phpunit
+  $ docker compose exec php composer create-project symfony/skeleton .
+  $ docker compose exec php composer require --dev symfony/test-pack
   
-  $ docker-compose exec php setfacl -dR -m u:www-data:rwX -m u:root:rwX var
-  $ docker-compose exec php setfacl -R -m u:www-data:rwX -m u:root:rwX var
+  $ docker compose exec php setfacl -dR -m u:www-data:rwX -m u:root:rwX var
+  $ docker compose exec php setfacl -R -m u:www-data:rwX -m u:root:rwX var
   ```
 - When using multiple copies of this template, make sure the directory names are unique to each other (https://docs.docker.com/compose/#multiple-isolated-environments-on-a-single-host).
 

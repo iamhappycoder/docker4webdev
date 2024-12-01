@@ -59,6 +59,7 @@ RUN sed -i \
 #
 RUN curl -LsS  https://getcomposer.org/composer.phar -o /usr/local/bin/composer
 RUN chmod a+x /usr/local/bin/composer
+ENV PATH="~/.composer/vendor/bin:$PATH"
 
 EXPOSE 9000
 ENTRYPOINT ["php-fpm8.2", "--force-stderr", "--fpm-config", "/etc/php/8.2/fpm/php-fpm.conf"]

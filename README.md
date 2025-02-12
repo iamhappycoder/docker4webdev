@@ -102,8 +102,12 @@ NOTES:
       image: postgres:13.0
       volumes:
         - ./db/data:/var/lib/postgresql/data
+        - ./db/pg_hba.conf:/etc/postgresql/pg_hba.conf
       environment:
         POSTGRES_PASSWORD: root
+        POSTGRES_DB: master
+    ports:
+      - "54320:5432"
   ```
   
   Remove db/data/.gitignore because PostgreSQL does not like it being present

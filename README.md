@@ -1,6 +1,9 @@
-# docker-phpdev
+# Docker4WebDev
 
-Project template for PHP development in a Docker environment.
+Provides a pre-configured setup with commonly used services like PHP, NodeJS, Apache, MySQL, Redis, and Mailhog out-of-the-box.
+
+**WARNING: This project is intended for local development only. It includes services and tools (like Xdebug) that should never be exposed to the internet for security reasons. 
+Use this template to quickly set up a local web development environment, but ensure it is not deployed in a production setting.**
 
 Usage:
 
@@ -42,7 +45,7 @@ Usage:
 
   /etc/hosts
   ```
-  [CONTAINER-IP]    docker-phpdev.local
+  [CONTAINER-IP]    docker4webdev.local
   ```
   
 NOTES:
@@ -71,15 +74,15 @@ NOTES:
   Unique:
 
   ```
-  ~/backend/docker-phpdev-symfony
-  ~/frontend/docker-phpdev-laravel
+  ~/backend/docker4webdev-symfony
+  ~/frontend/docker4webdev-laravel
   ```
 
   Not unique:
 
   ```
-  ~/backend/docker-phpdev
-  ~/frontend/docker-phpdev
+  ~/backend/docker4webdev
+  ~/frontend/docker4webdev
   ```
 
   An alternative is to specify container_name for each service.

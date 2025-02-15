@@ -29,7 +29,7 @@ RUN dnf install -y \
     php-intl \
     php-xml \
     php-mbstring \
-    php-mysqlnd \
+    php-pgsql \
     php-xml \
     php-opcache \
     php-pecl-xdebug \

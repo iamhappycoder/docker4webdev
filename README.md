@@ -1,6 +1,6 @@
 # Docker4WebDev
 
-Provides a pre-configured setup with commonly used services like PHP, NodeJS, Apache, MySQL, Redis, and Mailhog out-of-the-box.
+Provides a pre-configured setup with commonly used services like PHP, NodeJS, Apache, PostgreSQL, Redis, and Mailhog out-of-the-box.
 
 **WARNING: This project is intended for local development only. It includes services and tools (like Xdebug) that should never be exposed to the internet for security reasons. 
 Use this template to quickly set up a local web development environment, but ensure it is not deployed in a production setting.**
@@ -87,33 +87,31 @@ NOTES:
 
   An alternative is to specify container_name for each service.
 
-- Switching to PostgeSQL
+- Switching to MariaDB
 
   Change php/Dockerfile
   
-  ```php7.4-mysql```
+  ```php8.4-pgsql```
   
   to
   
-  ```php7.4-pgsql```
+  ```php8.4-mysql```
   
   Change db service to
   
   ```
     db:
-      container_name: db
-      image: postgres:13.0
-      volumes:
-        - ./db/data:/var/lib/postgresql/data
-        - ./db/pg_hba.conf:/etc/postgresql/pg_hba.conf
-      environment:
-        POSTGRES_PASSWORD: root
-        POSTGRES_DB: master
+    image: mariadb:10.5
+    volumes:
+      - ./db/data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: master
     ports:
-      - "54320:5432"
+      - "33060:3306"
   ```
   
-  Remove db/data/.gitignore because PostgreSQL does not like it being present
+ - Remove db/data/.gitignore because PostgreSQL does not like it being present
   
   ```rm -rf db/data/.gitignore```
 

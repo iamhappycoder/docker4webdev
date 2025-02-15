@@ -28,12 +28,15 @@ services:
       - "4430:443"
 
   db:
-    image: mariadb:10.5
+    image: postgres:17.3
+    shm_size: 1g # Increase as needed.
     volumes:
-      - ./db/data:/var/lib/mysql
+      - ./db/data:/var/lib/postgresql/data
+      - ./db/pg_hba.conf:/etc/postgresql/pg_hba.conf
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: master
+      POSTGRES_PASSWORD: root
+    ports:
+      - "54320:5432"
 
   redis:
     image: redis:5

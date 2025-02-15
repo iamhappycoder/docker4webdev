@@ -2,7 +2,7 @@ services:
   php:
     build:
       context: ./php
-      dockerfile: Dockerfile.${OS}
+      dockerfile: Dockerfile.${DIST}
     volumes:
       - ${APP_DIR}:/app
       - ./php/cache:/root/.composer/cache

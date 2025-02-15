@@ -20,7 +20,7 @@ RUN dnf update -y --refresh
 # PHP
 #
 RUN dnf module reset php
-RUN dnf module enable -y php:remi-8.2
+RUN dnf module enable -y php:remi-8.4
 RUN dnf install -y \
     php-bcmath \
     php-cli \

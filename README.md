@@ -69,7 +69,7 @@ NOTES:
   $ docker compose exec php setfacl -dR -m u:www-data:rwX -m u:root:rwX var
   $ docker compose exec php setfacl -R -m u:www-data:rwX -m u:root:rwX var
   ```
-- When using multiple copies of this template, make sure the directory names are unique to each other (https://docs.docker.com/compose/#multiple-isolated-environments-on-a-single-host).
+- When using multiple copies of this template, make sure the directory names are unique to each other (https://docs.docker.com/compose/support-and-feedback/faq/#how-do-i-run-multiple-copies-of-a-compose-file-on-the-same-host).
 
   Unique:
 

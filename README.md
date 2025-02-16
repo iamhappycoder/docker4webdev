@@ -1,5 +1,7 @@
 # Docker4WebDev
 
+[![Build Docker containers](https://github.com/iamhappycoder/docker4webdev/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/iamhappycoder/docker4webdev/actions/workflows/build.yml)
+
 Provides a pre-configured setup with commonly used services like PHP, NodeJS, Apache, PostgreSQL, Redis, and Mailhog out-of-the-box.
 
 **WARNING: This project is intended for local development only. It includes services and tools (like Xdebug) that should never be exposed to the internet for security reasons. 

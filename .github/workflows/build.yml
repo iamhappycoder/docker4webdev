@@ -33,6 +33,7 @@ jobs:
         run: |
           echo "APP_DIR=./app" > .env
           echo "PUBLIC_DIR=/public" >> .env
+          echo "HOST_IP=" >> .env
           echo "DIST=${{ matrix.os }}" >> .env
           echo "WEB_SERVER=apache" >> .env
 

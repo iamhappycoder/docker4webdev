@@ -3,6 +3,8 @@ FROM ubuntu:24.04
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=UTC
 
+ARG HOST_IP
+
 #
 # Common
 #
@@ -43,7 +45,10 @@ do \
 done
 
 RUN echo "\nopcache.enable=1\nopcache.enable_cli=1" | tee --append /etc/php/8.4/mods-available/opcache.ini > /dev/null
-RUN echo "\nxdebug.var_display_max_data = -1\nxdebug.var_display_max_children = -1\nxdebug.var_display_max_depth = -1\nxdebug.mode = debug\nxdebug.discover_client_host = true\nxdebug.client_port = 9001" | tee --append /etc/php/8.4/mods-available/xdebug.ini > /dev/null
+RUN echo "\nxdebug.var_display_max_data = -1\nxdebug.var_display_max_children = -1\nxdebug.var_display_max_depth = -1\nxdebug.mode = debug\nxdebug.discover_client_host = true" | tee --append /etc/php/8.4/mods-available/xdebug.ini > /dev/null
+RUN if [ -n "$HOST_IP" ]; then \
+    echo "xdebug.client_host=$HOST_IP\n" | tee --append /etc/php/8.4/mods-available/xdebug.ini > /dev/null; \
+    fi
 
 RUN sed -i \
         -e 's/;daemonize = yes/daemonize = no/g' \

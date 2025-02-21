@@ -2,6 +2,8 @@ services:
   php:
     build:
       context: ./php
+      args:
+        HOST_IP: ${HOST_IP}
       dockerfile: Dockerfile.${DIST}
     volumes:
       - ${APP_DIR}:/app

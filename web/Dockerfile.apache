@@ -7,11 +7,14 @@ ARG PUBLIC_DIR
 #
 RUN apt update -y
 
+# For building FCGI apps
+RUN apt install -y libfcgi-dev libstdc++-8-dev g++ make
+
 #
 # Apache 2.4
 #
-RUN apt install -y apache2
-RUN a2enmod proxy proxy_fcgi rewrite expires headers ssl
+RUN apt install -y apache2 libapache2-mod-fcgid
+RUN a2enmod proxy proxy_fcgi rewrite expires headers ssl fcgid
 RUN a2ensite default-ssl
 
 RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf

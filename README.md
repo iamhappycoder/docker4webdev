@@ -105,18 +105,13 @@ NOTES:
     db:
     image: mariadb:10.5
     volumes:
-      - ./db/data:/var/lib/mysql
+      - db_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: master
     ports:
       - "33060:3306"
   ```
-  
- - Remove db/data/.gitignore because PostgreSQL does not like it being present
-  
-  ```rm -rf db/data/.gitignore```
-
 
 - Using with an existing project.
 

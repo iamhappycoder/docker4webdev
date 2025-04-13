@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile.${DIST}
     volumes:
       - ${APP_DIR}:/app
-      - ./php/cache:/root/.composer/cache
+      - composer_cache:/root/.composer/cache
     working_dir: /app
 
   nodejs:
@@ -33,7 +33,7 @@ services:
     image: postgres:17.3
     shm_size: 1g # Increase as needed.
     volumes:
-      - ./db/data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
       - ./db/pg_hba.conf:/etc/postgresql/pg_hba.conf
     environment:
       POSTGRES_PASSWORD: root
@@ -50,3 +50,7 @@ services:
     ports:
       - "10250:1025"
       - "8020:8025"
+
+volumes:
+  db_data:
+  composer_cache:

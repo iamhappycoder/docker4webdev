@@ -45,8 +45,8 @@ services:
     ports:
       - "63790:6379"
 
-  mailhog:
-    image: mailhog/mailhog
+  mailpit:
+    image: axllent/mailpit:latest
     ports:
       - "10250:1025"
       - "8020:8025"
